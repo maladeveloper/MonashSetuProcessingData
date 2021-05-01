@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +10,7 @@ public class ProcessReports {
 
     static private String reportsDir = "DownloadedReports/";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         
         File[] reportFileNames  = new File(reportsDir).listFiles();
@@ -18,16 +19,11 @@ public class ProcessReports {
 
         for(File curFile : reportFileNames){
 
-            Report newReport = new Report(curFile.toString());
+            Report newReport = new Report(curFile);
 
             processedReports.add(newReport);
 
-
-
         }
-
-        System.out.print(processedReports);
-
     }
 
 

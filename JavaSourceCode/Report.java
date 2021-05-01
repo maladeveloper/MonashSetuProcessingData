@@ -15,32 +15,34 @@ import org.jsoup.select.Elements;
 public class Report{
 
     private Document htmlDoc;
-
     private HashMap<String, String> fileInfo = new HashMap<String, String>();
-
     private PrintWriter out;
+    private ArrayList<InfoInterface> infos = new ArrayList<InfoInterface>(); 
 
     public Report(File curFile) throws IOException{
 
         this.htmlDoc = Jsoup.parse(curFile, null);
-        this.extractHeaderInfo();
         
+        this.addInfo();        
     }
 
-    private void extractHeaderInfo(){
+    private void addInfo(){
 
-        Element divHeader = this.htmlDoc.getElementsByClass("ReportBlockDetails").first();
-        Elements rows = divHeader.select("tr");
-        ArrayList<String> dataOrder = new ArrayList<String>(Arrays.asList("title", "subtitle","faculty", "criticalData", "name"));
+        //Add header info 
+        this.infos.add(new HeaderInfo(this.htmlDoc));
 
-        for(String infoKey: dataOrder){
-            String value = rows.first().select("strong").first().text();          
-            this.fileInfo.put(infoKey, value);
-            rows.remove(0);
-        }
-        
-        System.out.println(this.fileInfo);        
+        //Add the response info 
+        this.infos.add(new ResponseInfo(this.htmlDoc) );
     }
+
+
+
+
+
+
+
+
+
 
     public HashMap<String, String> getFileInfo(){
 

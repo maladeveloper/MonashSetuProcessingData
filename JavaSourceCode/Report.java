@@ -2,7 +2,11 @@ package JavaSourceCode;
 
 public class Report{
 
-    public Report(){
-        Integer x = 5; 
+    private String curFilePath;
+
+    public Report(String curFilePath){
+        
+        this.curFilePath = curFilePath;
+        
     }
 }

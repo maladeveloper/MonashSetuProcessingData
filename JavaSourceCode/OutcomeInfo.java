@@ -30,13 +30,8 @@ public class OutcomeInfo implements InfoInterface {
 
             try{
                 this.info.put(key, row.select("td").get(1).text());
-            }catch(IndexOutOfBoundsException e){
-                System.out.println("Report has no answers");
-            }
-        }
-        //System.out.println(this.keyInfo);
-        //System.out.println(this.info+"\n"+"--------------------------");
-        
+            }catch(IndexOutOfBoundsException e){ }
+        }       
     }
 
     public HashMap<String, String> getInfo() {return this.info;}

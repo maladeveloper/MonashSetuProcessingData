@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import JavaSourceCode.Report;
 
-public class ProcessReports {
+public class _3_process_reports {
 
     static private String reportsDir = "DownloadedReports/";
     static private String resultsDir = "ProcessedReports/";
@@ -39,16 +39,6 @@ public class ProcessReports {
             reportMapper.writerWithDefaultPrettyPrinter().writeValue(new File(reportName), report);
         }
 
-        //Write out entire processed reports into one file.
-        ObjectMapper mapper = new ObjectMapper(); mapper.writerWithDefaultPrettyPrinter().writeValue(new File(allResultsFile), processedReports);
-        
-        
-        
-
-        
-
-
     }
-
 
 }

@@ -3,9 +3,9 @@ from pprint import pprint
 import requests
 import time
 ##Vars########################
-raw_links_file = "raw_links.txt"
-all_links_file  = "all_links.txt"
-down_links_file  = "downloaded_links.txt"
+raw_links_file = "Data/raw_links.txt"
+all_links_file  = "Data/all_links.txt"
+down_links_file  = "Data/downloaded_links.txt"
 start_id = "SelectedIDforPrint="
 end_id = "&ReportType"
 save_ftype = ".html"

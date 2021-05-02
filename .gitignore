@@ -2,3 +2,4 @@ DownloadedReports/
 .vscode/
 ProcessedReports/
 all_processed_reports.json
+env/

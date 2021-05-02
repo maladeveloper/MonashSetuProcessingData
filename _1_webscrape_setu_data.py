@@ -8,7 +8,7 @@ links_in_page = 10
 number_pages = 280
 pg_ld_time = 5 
 
-PC = False
+PC = True
 if PC:
     start_x, start_y = 519, 450
     link_x, link_y = 89, 158

@@ -3,17 +3,29 @@ import pyautogui as pag
 import time
 
 ##Vars###############################
-start_x, start_y = 519, 450
-link_x, link_y = 89, 158
-editor_x, editor_y = 39, 542
-txt_x, txt_y = 784, 106
-mini_x, mini_y = 1834, 47 
 move_time = 0.25
 links_in_page = 10
-delta_link = 33
-nxt_pg_x, nxt_pg_y = 1819, 780
-number_pages = 20
-pg_ld_time = 5   
+number_pages = 280
+pg_ld_time = 5 
+
+PC = False
+if PC:
+    start_x, start_y = 519, 450
+    link_x, link_y = 89, 158
+    editor_x, editor_y = 39, 542
+    txt_x, txt_y = 784, 106
+    mini_x, mini_y = 1834, 47 
+    delta_link = 33
+    nxt_pg_x, nxt_pg_y = 1819, 780
+else:
+    start_x, start_y = 619, 649
+    link_x, link_y = 119, 227
+    editor_x, editor_y = 1221, 1467
+    txt_x, txt_y = 618, 79
+    mini_x, mini_y = 2050, 25 
+    delta_link = 49
+    nxt_pg_x, nxt_pg_y = 2114, 1142
+  
 #####################################
 # while True:
 #     print(pag.position())

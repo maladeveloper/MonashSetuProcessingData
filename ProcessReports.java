@@ -3,12 +3,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import JavaSourceCode.Report;
 
 public class ProcessReports {
 
     static private String reportsDir = "DownloadedReports/";
+    static private String resultsDir = "ProcessedReports/";
+    static private String allResultsFile = "all_processed_reports.json";
+    static private String[] reportKeyPath = {"headerInfo", "criticalData"};
+    static private String jsonFileExt = ".json";
 
     public static void main(String[] args) throws IOException {
 
@@ -24,6 +29,25 @@ public class ProcessReports {
             processedReports.add(newReport);
 
         }
+
+        //Write out each report to processed reports folder
+        for (Report report: processedReports){
+            ObjectMapper reportMapper = new ObjectMapper(); 
+
+            String reportName = resultsDir + report.getFileInfo().get(reportKeyPath[0]).get(reportKeyPath[1]) + jsonFileExt;
+
+            reportMapper.writerWithDefaultPrettyPrinter().writeValue(new File(reportName), report);
+        }
+
+        //Write out entire processed reports into one file.
+        ObjectMapper mapper = new ObjectMapper(); mapper.writerWithDefaultPrettyPrinter().writeValue(new File(allResultsFile), processedReports);
+        
+        
+        
+
+        
+
+
     }
 
 

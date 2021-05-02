@@ -10,6 +10,7 @@ import org.jsoup.select.Elements;
 public class ResponseInfo implements InfoInterface {
 
     Document htmlDoc;
+    String keyInfo = "responseInfo";
     HashMap<String,String> info = new HashMap<String, String>();
     ArrayList<String> orderedKeys = new ArrayList<String>(Arrays.asList("rater","respCount", "inviteCount", "respRate"));
 
@@ -42,15 +43,8 @@ public class ResponseInfo implements InfoInterface {
     }
 
 
+    public HashMap<String, String> getInfo() {return this.info;}
 
-
-
-
-
-
-    public HashMap<String, String> getInfo() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    public String getKey(){return this.keyInfo;}
     
 }

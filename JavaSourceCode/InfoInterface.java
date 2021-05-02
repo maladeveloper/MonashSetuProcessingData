@@ -6,4 +6,6 @@ public interface InfoInterface {
     
     public HashMap<String,String> getInfo();
 
+    public String getKey();
+
 }

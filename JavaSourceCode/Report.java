@@ -15,8 +15,7 @@ import org.jsoup.select.Elements;
 
 public class Report{
 
-    private Document htmlDoc;
-    private HashMap<String, String> fileInfo = new HashMap<String, String>();
+    private Document htmlDoc; 
     private PrintWriter out;
     private ArrayList<InfoInterface> infos = new ArrayList<InfoInterface>(); 
 
@@ -44,7 +43,7 @@ public class Report{
 
             keyInfo = getCleanKey(keyInfo);
             
-            this.infos.add(new OutcomeInfo(this.htmlDoc, keyInfo));
+            this.infos.add(new OutcomeInfo(outcome, keyInfo));
         }
     }
 
@@ -61,15 +60,12 @@ public class Report{
 
 
 
+    public HashMap<String, HashMap<String,String>> getFileInfo(){
 
+        HashMap<String, HashMap<String,String>> reportInfo = new HashMap<String, HashMap<String,String>>();
 
+        for (InfoInterface info: this.infos){ reportInfo.put(info.getKey(), info.getInfo());}
 
-
-
-
-
-    public HashMap<String, String> getFileInfo(){
-
-        return this.fileInfo;
-    }
+        return reportInfo;
+    } 
 }

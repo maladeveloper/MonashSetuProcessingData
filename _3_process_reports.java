@@ -1,43 +1,52 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
 
-import JavaSourceCode.Report;
+import JavaSourceCode.WorkerThread;
 
 public class _3_process_reports {
 
+    static private int numberOfThreads = 10;
     static private String reportsDir = "DownloadedReports/";
-    static private String resultsDir = "ProcessedReports/";
-    static private String allResultsFile = "all_processed_reports.json";
-    static private String[] reportKeyPath = {"headerInfo", "criticalData"};
-    static private String jsonFileExt = ".json";
+
 
     public static void main(String[] args) throws IOException {
 
         
         File[] reportFileNames  = new File(reportsDir).listFiles();
+        ArrayList<ArrayList<File>> splitFiles = new ArrayList<ArrayList<File>>();
+        ArrayList<File> tempFiles = new ArrayList<File>();
+        int count = 0;
 
-        ArrayList<Report> processedReports = new ArrayList<Report>();
+        for (int i=0; i < reportFileNames.length; i++){
 
-        for(File curFile : reportFileNames){
+            count ++; 
 
-            Report newReport = new Report(curFile);
+            if(count == (reportFileNames.length / numberOfThreads)){
 
-            processedReports.add(newReport);
+                count = 0;splitFiles.add(tempFiles);
 
+                tempFiles = new ArrayList<File>();
+            }
+            
+            tempFiles.add(reportFileNames[i]);
         }
+        splitFiles.add(tempFiles);
 
-        //Write out each report to processed reports folder
-        for (Report report: processedReports){
-            ObjectMapper reportMapper = new ObjectMapper(); 
+        System.out.print("Processing " + String.valueOf(reportFileNames.length) +" reports via " + String.valueOf(numberOfThreads)+ " threads...\n");
 
-            String reportName = resultsDir + report.getFileInfo().get(reportKeyPath[0]).get(reportKeyPath[1]) + jsonFileExt;
+        //Call the threads
+        for (int i=0; i<numberOfThreads; i++){
 
-            reportMapper.writerWithDefaultPrettyPrinter().writeValue(new File(reportName), report);
+            WorkerThread workerThread = new WorkerThread(i+1,splitFiles.get(i));
+
+            System.out.print("Starting new worker thread: " + String.valueOf(i+1)+ "\n");
+
+            workerThread.start();
         }
+        
 
     }
 
